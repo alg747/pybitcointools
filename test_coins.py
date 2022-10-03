@@ -5,6 +5,7 @@ from cryptos import *
 from cryptos import coins
 from cryptos import explorers
 
+
 class BaseCoinCase(unittest.TestCase):
     name = ""
     unspent_address = ""
@@ -336,7 +337,7 @@ class BaseCoinCase(unittest.TestCase):
         self.assertPushTxOK(result)
 
     def assertPushTxOK(self, result):
-        #For chain.so. Override for other explorers.
+        # For chain.so. Override for other explorers.
         if isinstance(result, dict):
             try:
                 self.assertEqual(result['status'], "success")

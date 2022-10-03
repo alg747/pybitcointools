@@ -5,8 +5,7 @@ from ..explorers import blockchain
 from ..electrumx_client.rpc import ElectrumXClient
 from ..keystore import *
 from ..wallet import *
-from ..py3specials import *
-from ..py2specials import *
+from ..utils import *
 
 class BaseCoin(object):
     """

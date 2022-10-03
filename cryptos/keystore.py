@@ -36,7 +36,7 @@ from .main import *
 class KeyStore(object):
 
     def __init__(self, coin, addresses=()):
-        self.coin=coin
+        self.coin = coin
         self.addresses = list(addresses)
         self.root_derivation = None
         self.bip39_prefixes = ()

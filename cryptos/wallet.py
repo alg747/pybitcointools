@@ -1,6 +1,7 @@
 from .main import *
 from .keystore import xpubkey_to_address
 
+
 class HDWallet(object):
 
     def __init__(self, keystore, num_addresses=0, last_receiving_index=0, last_change_index=0):

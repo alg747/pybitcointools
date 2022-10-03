@@ -1,6 +1,4 @@
 #!/usr/bin/python
-from .py2specials import *
-from .py3specials import *
 import binascii
 import hashlib
 import re
@@ -8,6 +6,7 @@ import base64
 import time
 import random
 import hmac
+from .utils import *
 from .ripemd import *
 
 # Elliptic curve parameters (secp256k1)

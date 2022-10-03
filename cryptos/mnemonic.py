@@ -1,21 +1,13 @@
 import random
 from pbkdf2 import PBKDF2
 import hmac
-from .py2specials import *
-from .py3specials import *
+from .utils import *
 from .wallet_utils import is_new_seed
 from bisect import bisect_left
 import unicodedata
+from . import constants
 
 wordlist_english=[word.strip() for word in list(open(os.path.join(os.path.dirname(os.path.realpath(__file__)),'english.txt'),'r'))]
-
-ELECTRUM_VERSION = '3.0.5'   # version of the client package
-PROTOCOL_VERSION = '1.1'     # protocol version requested
-
-# The hash of the mnemonic seed must begin with this
-SEED_PREFIX      = '01'      # Standard wallet
-SEED_PREFIX_2FA  = '101'     # Two-factor authentication
-SEED_PREFIX_SW   = '100'     # Segwit wallet
 
 whitespace = ' \t\n\r\v\f'
 

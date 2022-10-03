@@ -2,7 +2,7 @@ from .base import BaseCoin
 from ..transaction import SIGHASH_ALL, SIGHASH_FORKID
 from ..explorers import btg_explorer
 from ..main import b58check_to_bin
-from ..py3specials import bin_to_b58check
+from ..utils import bin_to_b58check
 
 FORKID_BTG = 79
 

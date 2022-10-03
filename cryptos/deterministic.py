@@ -1,4 +1,5 @@
 from .main import *
+from .utils import *
 import hmac
 import hashlib
 
@@ -24,7 +25,8 @@ def electrum_privkey(seed, n, for_change=0):
     if len(seed) == 32:
         seed = electrum_stretch(seed)
     mpk = electrum_mpk(seed)
-    offset = dbl_sha256(from_int_representation_to_bytes(n)+b':'+from_int_representation_to_bytes(for_change)+b':'+binascii.unhexlify(mpk))
+    offset = dbl_sha256(from_int_representation_to_bytes(n) + b':' + from_int_representation_to_bytes(
+        for_change) + b':' + binascii.unhexlify(mpk))
     return add_privkeys(seed, offset)
 
 # Accepts (seed or stretched seed or master pubkey), index and secondary index
@@ -96,7 +98,7 @@ def raw_bip32_ckd(rawtuple, i, prefixes=DEFAULT):
         newkey = add_pubkeys(compress(privtopub(I[:32])), key)
         fingerprint = bin_hash160(key)[:4]
 
-    return (vbytes, depth + 1, fingerprint, i, I[32:], newkey)
+    return vbytes, depth + 1, fingerprint, i, I[32:], newkey
 
 
 def bip32_serialize(rawtuple, prefixes=DEFAULT):
@@ -118,7 +120,7 @@ def bip32_deserialize(data, prefixes=DEFAULT):
     i = decode(dbin[9:13], 256)
     chaincode = dbin[13:45]
     key = dbin[46:78]+b'\x01' if vbytes == prefixes[0] else dbin[45:78]
-    return (vbytes, depth, fingerprint, i, chaincode, key)
+    return vbytes, depth, fingerprint, i, chaincode, key
 
 
 def is_xprv(text, prefixes=DEFAULT):
@@ -134,7 +136,7 @@ def is_xpub(text, prefixes=DEFAULT):
 def raw_bip32_privtopub(rawtuple, prefixes=DEFAULT):
     vbytes, depth, fingerprint, i, chaincode, key = rawtuple
     newvbytes = prefixes[1]
-    return (newvbytes, depth, fingerprint, i, chaincode, privtopub(key))
+    return newvbytes, depth, fingerprint, i, chaincode, privtopub(key)
 
 
 def bip32_privtopub(data, prefixes=DEFAULT):
@@ -189,7 +191,7 @@ def raw_crack_bip32_privkey(parent_pub, priv, prefixes=DEFAULT):
     pprivkey = subtract_privkeys(key, I[:32]+b'\x01')
 
     newvbytes = prefixes[0]
-    return (newvbytes, pdepth, pfingerprint, pi, pchaincode, pprivkey)
+    return newvbytes, pdepth, pfingerprint, pi, pchaincode, pprivkey
 
 
 def crack_bip32_privkey(parent_pub, priv, prefixes=DEFAULT):
